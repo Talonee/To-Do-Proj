@@ -1,4 +1,4 @@
-# To-Do-Proj (Incomplete)
+# To-Do-Proj (In Progress)
 
 ## Project Description
 The goal of this project is to imitate a to-do list with a focus on presenting flexible display functions (sort, day/month/year, multilevels, etc.) and storage of various to-do item based on their status (checked/unchecked, special tasks, etc.). 
@@ -27,5 +27,5 @@ The goal of this project is to imitate a to-do list with a focus on presenting f
 **Add:**
 - Available parameters for 1 argument: `str, int, list, or tuple`
 - Available parameters for 2 arguments: `pair of (str/int, str/int) and (list/tuple, list/tuple)`
-    - _1st arg = index (int), 2nd arg = values, **interchangable_
+    - _1st arg = index, 2nd arg = str, **interchangable_
     - _If both args contain strictly numbers, default to 1st arg = index, 2nd arg = values_
