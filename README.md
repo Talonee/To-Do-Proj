@@ -29,3 +29,8 @@ The goal of this project is to imitate a to-do list with a focus on presenting f
 - Available parameters for 2 arguments: `pair of (str/int, str/int) and (list/tuple, list/tuple)`
     - _1st arg = index, 2nd arg = str, **interchangable_
     - _If both args contain strictly numbers, default to 1st arg = index, 2nd arg = values_
+
+**Remove:**
+- Available parameters for 1 argument: `str, int, list, tuple`
+    - _All integers will default to indices_
+    - _All strings will default to values_
