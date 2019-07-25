@@ -1,8 +1,4 @@
 lists = {"To-do": [], "Checked": [], "Unchecked": [], "Discarded": set(())}
-# lists.get("To-do") = lists.get("To-do") # to do list
-# lists.get("Checked") = lists.get("Checked")  # checked item
-# lists.get("Unchecked") = lists.get("Unchecked")  # unchecked item
-# dsc = lists.get("Discarded") # discarded item
 err = []  # show all error messages
 
 ################### DISPLAY ###################
@@ -290,68 +286,45 @@ def uncheck(i):
 
 
 '''
-################### UPDATE ###################
+    ################### UPDATE ###################
 
-# # update list of checked items
-# def updateChecked():
-#     for i in lists.get("To-do"):
-#         if (i not in lists.get("Checked")) and i[-2:] == "-c":
-#             lists.get("Checked").append(i)
-#     lists.update({"To-do": lists.get("To-do"),
-#                   "Checked": lists.get("Checked"),
-#                   "Unchecked": lists.get("Unchecked")})
+    # # update list of checked items
+    # def updateChecked():
+    #     for i in lists.get("To-do"):
+    #         if (i not in lists.get("Checked")) and i[-2:] == "-c":
+    #             lists.get("Checked").append(i)
+    #     lists.update({"To-do": lists.get("To-do"),
+    #                   "Checked": lists.get("Checked"),
+    #                   "Unchecked": lists.get("Unchecked")})
 
-# # update list of unchecked items
-# def updateUnchecked():
-#     for i in lists.get("To-do"):
-#         if (i not in lists.get("Unchecked")) and i[-2:] != "-c":
-#             lists.get("Unchecked").append(i)
-#     lists.update({"To-do": lists.get("To-do"), "Checked": lists.get("Checked"), "Unchecked": lists.get("Unchecked")})
+    # # update list of unchecked items
+    # def updateUnchecked():
+    #     for i in lists.get("To-do"):
+    #         if (i not in lists.get("Unchecked")) and i[-2:] != "-c":
+    #             lists.get("Unchecked").append(i)
+    #     lists.update({"To-do": lists.get("To-do"), "Checked": lists.get("Checked"), "Unchecked": lists.get("Unchecked")})
 
-# def updateAll():
-#     lists.update({"To-do": lists.get("To-do"), "Checked": lists.get("Checked"), "Unchecked": lists.get("Unchecked")})
-#     print(lists)
-#     updateChecked()
-#     updateUnchecked()
+    # def updateAll():
+    #     lists.update({"To-do": lists.get("To-do"), "Checked": lists.get("Checked"), "Unchecked": lists.get("Unchecked")})
+    #     print(lists)
+    #     updateChecked()
+    #     updateUnchecked()
 '''
 
 ### Add
-# add(["Eat", "Drink", "Sleep"])
-# add(["Swim", "Laugh", "Superhero", "♣"], [0,0,10,0])
-# add([1024, "Fruit", "Life", 1738, "Drink"])
-# add("Run", 8)
-# add("Alligator")
-# add("Doink", 6)
-# add([1, 2, 2, 2], ["Watermelon", "Grass", "Apple", "Beans"])
-# add([1, 2, 4, 0], [1, "Fish", 2, 6])
-# add(["Watermelon", "Grass", "Apple", "Beans"], ["Watermelon", "Grass", "Apple", "Beans"])
+    # add(["Eat", "Drink", "Sleep"])
+    # add(["Swim", "Laugh", "Superhero", "♣"], [0,0,10,0])
+    # add([1024, "Fruit", "Life", 1738, "Drink"])
+    # add("Run", 8)
+    # add("Alligator")
+    # add("Doink", 6)
+    # add([1, 2, 2, 2], ["Watermelon", "Grass", "Apple", "Beans"])
+    # add([1, 2, 4, 0], [1, "Fish", 2, 6])
+    # add(["Watermelon", "Grass", "Apple", "Beans"], ["Watermelon", "Grass", "Apple", "Beans"])
 
 ### Remove
-# rem(["Laugh", "Laugh", "Swim", "sWim", "Drink"])
-# rem([0,16,0,222,0])
-# clearAll()
+    # rem(["Laugh", "Laugh", "Swim", "sWim", "Drink"])
+    # rem([0,16,0,222,0])
+    # clearAll()
 
 dspAll()
-
-# lst2 = ["Watermelon", "Grass", "Apple", "Beans"]
-# lst1 = [1,2,-1,2]
-# lst3 = ["!", 2222, "asdasd"]
-# print(all(isinstance(x, (str, int)) for x in lst3))
-# woop = []
-
-# for i in lst2:
-#     woop.insert(lst1[lst2.index(i)], i)
-# print(woop)
-
-# rem(["Drink, Cry"])
-# updateAll()
-# displayAll()
-
-# check("Eat")
-# check("Drink")
-# updateAll()
-# displayAll()
-
-# uncheck(1)
-# updateAll()
-# displayAll()"
