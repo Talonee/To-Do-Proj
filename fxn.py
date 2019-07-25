@@ -59,7 +59,6 @@ def dspError():
 
 
 def add(*args):
-
     exist = False
     intReturn = []
     strReturn = []
@@ -87,14 +86,20 @@ def add(*args):
     elif len(args) == 2: # index + item
         if isinstance(args[0], (str, int)) and isinstance(args[1], (str, int)):
             if isinstance(args[0], str) and isinstance(args[1], int):
-                if args[1] >= 0 and args[1] < len(lists["To-do"]):
+                if not lists["To-do"] and args[1] == 0:
+                    lists["To-do"].append(args[0])
+                    lists["Unchecked"].append(args[0])
+                elif args[1] >= 0 and args[1] < len(lists["To-do"]):
                     lists["To-do"].insert(args[1], args[0])
                     lists["Unchecked"].append(args[0])
                 else:
                     intReturn.append(str(args[1]))
                     exist = True
             elif isinstance(args[0], int) and isinstance(args[1], str):
-                if args[0] >= 0 and args[0] < len(lists["To-do"]):
+                if not lists["To-do"] and args[0] == 0:
+                    lists["To-do"].append(args[1])
+                    lists["Unchecked"].append(args[1])
+                elif args[0] >= 0 and args[0] < len(lists["To-do"]):
                     lists["To-do"].insert(args[0], args[1])
                     lists["Unchecked"].append(args[1])
                 else:
@@ -114,7 +119,10 @@ def add(*args):
                 for i in args[1]:
                     if i not in lists["To-do"]:
                         index = args[0][args[1].index(i)]
-                        if index >= 0 and index < len(lists["To-do"]):
+                        if not lists["To-do"] and index == 0:
+                            lists["To-do"].append(i)
+                            lists["Unchecked"].append(i)
+                        elif index >= 0 and index < len(lists["To-do"]):
                             lists["To-do"].insert(index, i)
                             lists["Unchecked"].append(i)
                         else:
@@ -128,7 +136,10 @@ def add(*args):
                 for i in args[0]:
                     if i not in lists["To-do"]:
                         index = args[1][args[0].index(i)]
-                        if index >= 0 and index < len(lists["To-do"]):
+                        if not lists["To-do"] and index == 0:
+                            lists["To-do"].append(i)
+                            lists["Unchecked"].append(i)
+                        elif index >= 0 and index < len(lists["To-do"]):
                             lists["To-do"].insert(index, i)
                             lists["Unchecked"].append(i)
                         else:
@@ -141,26 +152,22 @@ def add(*args):
                 raise TypeError(
                     "One parameter must contain strictly numbers, another must contain strictly strings"
                 )
-
-            if exist and len(intReturn) > 0:
-                err.append("   Add: Index(ces) [" + ", ".join(intReturn) +
-                       "] are out of bound")
-            if exist and len(strReturn) > 0:
-                err.append("   Add: Item(s) [" + ", ".join(strReturn) + "] do not exist")
-
         else:
             raise TypeError("Invalid parameters")
+
+        if exist and len(intReturn) > 0:
+            err.append("   Add: Index(ces) [" + ", ".join(intReturn) +
+                    "] are out of bound")
+        if exist and len(strReturn) > 0:
+            err.append("   Add: Item(s) [" + ", ".join(strReturn) + "] do not exist")
+
     else:
         raise IndexError("Invalid number of arguments")
 
 
 ################### REMOVE ###################
 
-# remove item(s) from To-do
 def rem(i):
-    # if fxn not in lists.keys():
-    #     raise NameError("Incorrect list name")
-
     exist = False
     intReturn = []
     strReturn = []
@@ -183,7 +190,7 @@ def rem(i):
             elif remVal in lists["Unchecked"]:
                 lists["Unchecked"].remove(remVal)
         else:
-            intReturn.append(i)
+            intReturn.append(str(i))
             exist = True
     elif isinstance(i, (tuple, list)):
         for item in i:
@@ -205,9 +212,8 @@ def rem(i):
                     elif remVal in lists["Unchecked"]:
                         lists["Unchecked"].remove(remVal)
                 else:
-                    intReturn.append(item)
+                    intReturn.append(str(item))
                     exist = True
-
             else:
                 raise TypeError("Item wasn't a string or an integer")
     else:
@@ -297,29 +303,21 @@ def clearCheck():
     pass
 
 
-# add(1, ["Swim", "Laugh", "Superhero", "♣"])
-add(["Eat", "Drink", "Sleep"])
-add([0,0,10,0], ["Swim", "Laugh", "Superhero", "♣"])
+### Add
+# add(["Eat", "Drink", "Sleep"])
+# add("Doink", 6)
 # add(["Swim", "Laugh", "Superhero", "♣"], [0,0,10,0])
-
-
-# print(lists.get("To-do"))
-# add(6, "Run")
-# add("Dance", 3)
-add([1024, "Fruit", "Life", 1738, "Drink"])
-# add("Swim")
-# # case 1
+# add([1024, "Fruit", "Life", 1738, "Drink"])
+# add("Run", 8)
+# add("Alligator")
 # add([1, 2, 2, 2], ["Watermelon", "Grass", "Apple", "Beans"])
-# # case 2
 # add([1, 2, 4, 0], [1, "Fish", 2, 6])
-# add(["Woopers"], [1])
-# case 3
 # add(["Watermelon", "Grass", "Apple", "Beans"], ["Watermelon", "Grass", "Apple", "Beans"])
 
-# rem([1, 1, 6, 12, 5], "To-do")
-rem(["Laugh", "Superhero", "Laugh", "Swim", "sWim", "Drink"])
+### Remove
+# rem(["Laugh", "Superhero", "Laugh", "Swim", "sWim", "Drink"])
+# rem([0,16,0,222,0])
 
-# rem([0, 2, 5, 3], "To-do")
 dspAll()
 
 # lst2 = ["Watermelon", "Grass", "Apple", "Beans"]
