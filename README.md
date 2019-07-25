@@ -1,7 +1,7 @@
 # To-Do-Proj (In Progress)
 
 ## Project Description
-The goal of this project is to imitate a to-do list with a focus on presenting flexible display functions (sort, day/month/year, multilevels, etc.) and storage of various to-do item based on their status (checked/unchecked, special tasks, etc.). 
+The goal of this project is to imitate a to-do list with a focus on presenting flexible display functions (sort, day/month/year, multilevels, etc.) and to-do items based on their status (checked/unchecked, special tasks, etc.). 
 
 
 ## Technical Description
@@ -34,3 +34,11 @@ The goal of this project is to imitate a to-do list with a focus on presenting f
 - Available parameters for 1 argument: `str, int, list, tuple`
     - _All integers will default to indices_
     - _All strings will default to values_
+
+**To Do**
+- ~~Display fxn~~
+- ~~Add fxn~~
+- ~~Remove/clear fxn~~
+- Check/uncheck fxn
+- Sort fxn
+- Implement classes/attributes
