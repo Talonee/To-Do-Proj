@@ -1,4 +1,4 @@
-lists = {"To-do": [], "Checked": [], "Unchecked": [], "Discarded": []}
+lists = {"To-do": [], "Checked": [], "Unchecked": [], "Discarded": set(())}
 # lists.get("To-do") = lists.get("To-do") # to do list
 # lists.get("Checked") = lists.get("Checked")  # checked item
 # lists.get("Unchecked") = lists.get("Unchecked")  # unchecked item
@@ -83,7 +83,7 @@ def add(*args):
                 err.append("   Add: Item(s) [" + ", ".join(strReturn) +
                            "] already exist.")
 
-    elif len(args) == 2: # index + item
+    elif len(args) == 2:  # index + item
         if isinstance(args[0], (str, int)) and isinstance(args[1], (str, int)):
             if isinstance(args[0], str) and isinstance(args[1], int):
                 if not lists["To-do"] and args[1] == 0:
@@ -114,8 +114,8 @@ def add(*args):
             if len(args[0]) != len(args[1]):
                 raise TypeError("Invalid list lengths")
 
-            if (all(type(x) is int for x in args[0]) 
-                  and all(type(x) is str for x in args[1])):
+            if (all(type(x) is int for x in args[0])
+                    and all(type(x) is str for x in args[1])):
                 for i in args[1]:
                     if i not in lists["To-do"]:
                         index = args[0][args[1].index(i)]
@@ -157,15 +157,17 @@ def add(*args):
 
         if exist and len(intReturn) > 0:
             err.append("   Add: Index(ces) [" + ", ".join(intReturn) +
-                    "] are out of bound")
+                       "] are out of bound")
         if exist and len(strReturn) > 0:
-            err.append("   Add: Item(s) [" + ", ".join(strReturn) + "] do not exist")
+            err.append("   Add: Item(s) [" + ", ".join(strReturn) +
+                       "] do not exist")
 
     else:
         raise IndexError("Invalid number of arguments")
 
 
-################### REMOVE ###################
+################### REMOVE + CLEAR ###################
+
 
 def rem(i):
     exist = False
@@ -176,9 +178,11 @@ def rem(i):
         if (i + "-c" in lists["Checked"]):
             lists["To-do"].remove(i + "-c")
             lists["Checked"].remove(i + "-c")
+            lists["Discarded"].add(i + "-c")
         elif (i in lists["Unchecked"]):
             lists["To-do"].remove(i)
             lists["Unchecked"].remove(i)
+            lists["Discarded"].add(i)
         else:
             strReturn.append(i)
             exist = True
@@ -189,6 +193,7 @@ def rem(i):
                 lists["Checked"].remove(remVal)
             elif remVal in lists["Unchecked"]:
                 lists["Unchecked"].remove(remVal)
+            lists["Discarded"].add(remVal)
         else:
             intReturn.append(str(i))
             exist = True
@@ -198,9 +203,11 @@ def rem(i):
                 if (item + "-c" in lists["Checked"]):
                     lists["To-do"].remove(item + "-c")
                     lists["Checked"].remove(item + "-c")
+                    lists["Discarded"].add(item + "-c")
                 elif (item in lists["Unchecked"]):
                     lists["To-do"].remove(item)
                     lists["Unchecked"].remove(item)
+                    lists["Discarded"].add(item)
                 else:
                     strReturn.append(item)
                     exist = True
@@ -211,6 +218,7 @@ def rem(i):
                         lists["Checked"].remove(remVal)
                     elif remVal in lists["Unchecked"]:
                         lists["Unchecked"].remove(remVal)
+                    lists["Discarded"].add(remVal)
                 else:
                     intReturn.append(str(item))
                     exist = True
@@ -220,44 +228,37 @@ def rem(i):
         raise TypeError("Item wasn't a list, tuple, string, or an integer")
 
     if exist and len(intReturn) > 0:
-            err.append("Remove: Index(ces) [" + ", ".join(intReturn) +
-                       "] are out of bound")
+        err.append("Remove: Index(ces) [" + ", ".join(intReturn) +
+                   "] are out of bound")
     if exist and len(strReturn) > 0:
-        err.append("Remove: Item(s) [" + ", ".join(strReturn) + "] do not exist")
+        err.append("Remove: Item(s) [" + ", ".join(strReturn) +
+                   "] do not exist")
 
 
-def remAll():
-    pass
+def clearTodo():
+    [lists["Discarded"].add(i) for i in lists["To-do"]]
+    lists["To-do"].clear()
+    lists["Checked"].clear()
+    lists["Unchecked"].clear()
 
 
-################### UPDATE ###################
+def clearDiscarded():
+    lists["Discarded"].clear()
 
-# # update list of checked items
-# def updateChecked():
-#     for i in lists.get("To-do"):
-#         if (i not in lists.get("Checked")) and i[-2:] == "-c":
-#             lists.get("Checked").append(i)
-#     lists.update({"To-do": lists.get("To-do"),
-#                   "Checked": lists.get("Checked"),
-#                   "Unchecked": lists.get("Unchecked")})
 
-# # update list of unchecked items
-# def updateUnchecked():
-#     for i in lists.get("To-do"):
-#         if (i not in lists.get("Unchecked")) and i[-2:] != "-c":
-#             lists.get("Unchecked").append(i)
-#     lists.update({"To-do": lists.get("To-do"), "Checked": lists.get("Checked"), "Unchecked": lists.get("Unchecked")})
+def clearError():
+    err.clear()
 
-# def updateAll():
-#     lists.update({"To-do": lists.get("To-do"), "Checked": lists.get("Checked"), "Unchecked": lists.get("Unchecked")})
-#     print(lists)
-#     updateChecked()
-#     updateUnchecked()
+
+def clearAll():
+    clearTodo()
+    clearDiscarded()
+    clearError()
+
 
 ################### CHECK + UNCHECK ###################
 
 
-# check specified item
 def check(i):
     if isinstance(i, int) and (i >= 0 and i < len(lists.get("To-do"))):
         lists.get("Unchecked").remove(lists.get("To-do")[i])
@@ -288,35 +289,47 @@ def uncheck(i):
         print("Invalid Input")
 
 
-################### DISCARDED ###################
+'''
+################### UPDATE ###################
 
+# # update list of checked items
+# def updateChecked():
+#     for i in lists.get("To-do"):
+#         if (i not in lists.get("Checked")) and i[-2:] == "-c":
+#             lists.get("Checked").append(i)
+#     lists.update({"To-do": lists.get("To-do"),
+#                   "Checked": lists.get("Checked"),
+#                   "Unchecked": lists.get("Unchecked")})
 
-def clearAll():
-    # clear lists.get("To-do")
-    # clear check
-    # clear uncheck
-    # add to discarded
-    pass
+# # update list of unchecked items
+# def updateUnchecked():
+#     for i in lists.get("To-do"):
+#         if (i not in lists.get("Unchecked")) and i[-2:] != "-c":
+#             lists.get("Unchecked").append(i)
+#     lists.update({"To-do": lists.get("To-do"), "Checked": lists.get("Checked"), "Unchecked": lists.get("Unchecked")})
 
-
-def clearCheck():
-    pass
-
+# def updateAll():
+#     lists.update({"To-do": lists.get("To-do"), "Checked": lists.get("Checked"), "Unchecked": lists.get("Unchecked")})
+#     print(lists)
+#     updateChecked()
+#     updateUnchecked()
+'''
 
 ### Add
 # add(["Eat", "Drink", "Sleep"])
-# add("Doink", 6)
 # add(["Swim", "Laugh", "Superhero", "♣"], [0,0,10,0])
 # add([1024, "Fruit", "Life", 1738, "Drink"])
 # add("Run", 8)
 # add("Alligator")
+# add("Doink", 6)
 # add([1, 2, 2, 2], ["Watermelon", "Grass", "Apple", "Beans"])
 # add([1, 2, 4, 0], [1, "Fish", 2, 6])
 # add(["Watermelon", "Grass", "Apple", "Beans"], ["Watermelon", "Grass", "Apple", "Beans"])
 
 ### Remove
-# rem(["Laugh", "Superhero", "Laugh", "Swim", "sWim", "Drink"])
+# rem(["Laugh", "Laugh", "Swim", "sWim", "Drink"])
 # rem([0,16,0,222,0])
+# clearAll()
 
 dspAll()
 
