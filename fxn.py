@@ -6,33 +6,43 @@ err = []  # show all error messages
 
 # display calendar
 def dspTdl():
-    print(lists["To-do"])
+    print("To-do:")
+    for i in lists["To-do"]:
+        if i[-2:] == "-c":
+            print("   +", i)
+        else:
+            print("   -", i)
 
 
 def dspCkd():
-    print(lists["Checked"])
+    print("Checked:")
+    for i in lists["Checked"]:
+        print("   +", i)
 
 
 def dspUck():
-    print(lists["Unchecked"])
+    print("Unchecked:")
+    for i in lists["Unchecked"]:
+        print("   -", i)
 
 
 def dspDsc():
-    print(lists["Discarded"])
+    print("Discarded:")
+    for i in lists["Discarded"]:
+        if i[-2:] == "-c":
+            print("   +", i)
+        else:
+            print("   -", i)
 
 
 def dspAll():
     # updateAll()
-    print("To-do:")
     dspTdl()
     print()
-    print("Checked:")
     dspCkd()
     print()
-    print("Unchecked:")
     dspUck()
     print()
-    print("Discarded:")
     dspDsc()
     dspError()
 
@@ -312,19 +322,19 @@ def uncheck(i):
 '''
 
 ### Add
-    # add(["Eat", "Drink", "Sleep"])
-    # add(["Swim", "Laugh", "Superhero", "♣"], [0,0,10,0])
-    # add([1024, "Fruit", "Life", 1738, "Drink"])
-    # add("Run", 8)
-    # add("Alligator")
-    # add("Doink", 6)
-    # add([1, 2, 2, 2], ["Watermelon", "Grass", "Apple", "Beans"])
-    # add([1, 2, 4, 0], [1, "Fish", 2, 6])
-    # add(["Watermelon", "Grass", "Apple", "Beans"], ["Watermelon", "Grass", "Apple", "Beans"])
+add(["Eat", "Drink", "Sleep"])
+add(["Swim", "Laugh", "Superhero", "♣"], [0,0,10,0])
+add([1024, "Fruit", "Life", 1738, "Drink"])
+add("Run", 8)
+add("Alligator")
+add("Doink", 6)
+# add([1, 2, 2, 2], ["Watermelon", "Grass", "Apple", "Beans"])
+# add([1, 2, 4, 0], [1, "Fish", 2, 6])
+# add(["Watermelon", "Grass", "Apple", "Beans"], ["Watermelon", "Grass", "Apple", "Beans"])
 
 ### Remove
-    # rem(["Laugh", "Laugh", "Swim", "sWim", "Drink"])
-    # rem([0,16,0,222,0])
-    # clearAll()
+rem(["Laugh", "Laugh", "Swim", "sWim", "Drink"])
+rem([0,16,0,222,0])
+# clearAll()
 
 dspAll()
