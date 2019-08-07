@@ -265,21 +265,21 @@ def clearAll():
 ################### CHECK + UNCHECK ###################
 
 
-def check(i):
-    if isinstance(i, int) and (i >= 0 and i < len(lists.get("To-do"))):
-        lists.get("Unchecked").remove(lists.get("To-do")[i])
-        lists.get("To-do")[i] = lists.get("To-do")[i] + "-c"
-        lists.get("Checked").append(lists.get("To-do")[i])
-    elif isinstance(i, str) and (i in lists.get("To-do")):
-        lists.get("Unchecked").remove(i)
-        index = lists.get("To-do").index(i)
-        lists.get("To-do")[index] = lists.get("To-do")[index] + "-c"
-        lists.get("Checked").append(lists.get("To-do")[index])
-    else:
-        print("Invalid Input")
+# def check(i):
+#     if isinstance(i, int) and (i >= 0 and i < len(lists.get("To-do"))):
+#         lists.get("Unchecked").remove(lists.get("To-do")[i])
+#         lists.get("To-do")[i] = lists.get("To-do")[i] + "-c"
+#         lists.get("Checked").append(lists.get("To-do")[i])
+#     elif isinstance(i, str) and (i in lists.get("To-do")):
+#         lists.get("Unchecked").remove(i)
+#         index = lists.get("To-do").index(i)
+#         lists.get("To-do")[index] = lists.get("To-do")[index] + "-c"
+#         lists.get("Checked").append(lists.get("To-do")[index])
+#     else:
+#         print("Invalid Input")
 
 
-def uncheck(i):
+# def uncheck(i):
     if isinstance(i, int) and (i >= 0 and i < len(lists.get("To-do"))):
         lists.get("Checked").remove(lists.get("To-do")[i])
         lists.get("To-do")[i] = lists.get(
