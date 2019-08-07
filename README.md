@@ -35,10 +35,3 @@ The goal of this project is to imitate a to-do list with a focus on presenting f
     - _All integers will default to indices_
     - _All strings will default to values_
 
-**To Do**
-- ~~Display fxn~~
-- ~~Add fxn~~
-- ~~Remove/clear fxn~~
-- Check/uncheck fxn
-- Sort fxn
-- Implement classes/attributes
