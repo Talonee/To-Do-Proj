@@ -16,15 +16,15 @@ class Item:
         self.sub = sub
         self.level = level
         
-    def printItem():
-        print("   " * level, "+" if check else "-", name)
-        for i in subItems:
+    def printItem(self):
+        print("   " * self.level, "+" if self.check else "-", self.name)
+        for i in self.subItems:
             i.printItem()
 
-    def status():
-        print("Name:", name)
-        print("Excitement level:", excitement)
-        print("Difficulty level:", difficulty)
-        print("Sub-items (" + len(subItems) + "):", [i.name for i in subItems])
-        print("Level:", level)
+    def status(self):
+        print("Name:", self.name)
+        print("Excitement level:", self.excitement)
+        print("Difficulty level:", self.difficulty)
+        print("Sub-items (" + len(self.subItems) + "):", [i.name for i in self.subItems])
+        print("Level:", self.level)
 

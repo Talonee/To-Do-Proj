@@ -16,10 +16,7 @@ class ToDo(Item):
     def dspTdl(self):
         print("To-do:")
         for i in self.lists["To-do"]:
-            if i[-2:] == "-c":
-                print("   +", i)
-            else:
-                print("   -", i)
+            i.printItem()
 
 
     def dspCkd(self):
@@ -43,16 +40,16 @@ class ToDo(Item):
                 print("   -", i)
 
 
-    # def dspAll(self):
-    #     # updateAll()
-    #     dspTdl()
-    #     print()
-    #     dspCkd()
-    #     print()
-    #     dspUck()
-    #     print()
-    #     dspDsc()
-    #     dspError()
+    def dspAll(self):
+        # updateAll()
+        self.dspTdl()
+        print()
+        self.dspCkd()
+        print()
+        self.dspUck()
+        print()
+        self.dspDsc()
+        self.dspError()
 
 
     def dspError(self):
@@ -80,8 +77,8 @@ class ToDo(Item):
         if len(args) == 1:
             if isinstance(args[0],
                         (str, int)) and (str(args[0]) not in self.lists["To-do"]):
-                self.lists["To-do"].append(str(args[0]))
-                self.lists["Unchecked"].append(str(args[0]))
+                self.lists["To-do"].append(Item(str(args[0])))
+                self.lists["Unchecked"].append(Item(str(args[0])))
             elif isinstance(args[0],
                             (str, int)) and (str(args[0]) in self.lists["To-do"]):
                 self.err.append("Item [" + str(args[0]) + "] already exist")
