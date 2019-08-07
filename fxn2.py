@@ -8,6 +8,7 @@ class ToDo(Item):
 
     lists = {"To-do": [], "Checked": [], "Unchecked": [], "Discarded": set(())}
     err = []  # show all error messages
+    itemEntries = set()
 
     ################### DISPLAY ###################
 
@@ -22,22 +23,19 @@ class ToDo(Item):
     def dspCkd(self):
         print("Checked:")
         for i in self.lists["Checked"]:
-            print("   +", i)
+            i.printItem()
 
 
     def dspUck(self):
         print("Unchecked:")
         for i in self.lists["Unchecked"]:
-            print("   -", i)
+            i.printItem()
 
 
     def dspDsc(self):
         print("Discarded:")
         for i in self.lists["Discarded"]:
-            if i[-2:] == "-c":
-                print("   +", i)
-            else:
-                print("   -", i)
+            i.printItem()
 
 
     def dspAll(self):
@@ -75,28 +73,48 @@ class ToDo(Item):
         strReturn = []
 
         if len(args) == 1:
-            if isinstance(args[0],
-                        (str, int)) and (str(args[0]) not in self.lists["To-do"]):
-                self.lists["To-do"].append(Item(str(args[0])))
-                self.lists["Unchecked"].append(Item(str(args[0])))
-            elif isinstance(args[0],
-                            (str, int)) and (str(args[0]) in self.lists["To-do"]):
-                self.err.append("Item [" + str(args[0]) + "] already exist")
-            elif isinstance(args[0], (list, tuple)):
-                for item in args[0]:
-                    if item not in self.lists["To-do"]:
-                        self.lists["To-do"].append(str(item))
-                        self.lists["Unchecked"].append(str(item))
+            if isinstance(args[0], (str, int)):
+                if len(self.lists["To-do"]) == 0:
+                    self.lists["To-do"].append(Item(str(args[0])))
+                    self.lists["Unchecked"].append(Item(str(args[0])))
+                else:
+                    if str(args[0]) in self.itemEntries:
+                        strReturn.append(str(args[0]))
                     else:
-                        strReturn.append(str(item))
-                        exist = True
-                if exist:
-                    self.err.append("   Add: Item(s) [" + ", ".join(strReturn) +
-                            "] already exist.")
+                        self.lists["To-do"].append(Item(str(args[0])))
+                        self.lists["Unchecked"].append(Item(str(args[0])))
+                        self.itemEntries.add(args[0])
+
+            elif isinstance(args[0], (list, tuple)):
+                for i in args[0]:
+                    if len(self.lists["To-do"]) == 0:
+                        self.lists["To-do"].append(Item(i))
+                        self.lists["Unchecked"].append(Item(i))
+                    else:
+                        if str(i) in self.itemEntries:
+                            strReturn.append(str(i))
+                        else:
+                            self.lists["To-do"].append(Item(i))
+                            self.lists["Unchecked"].append(Item(i))
+                            self.itemEntries.add(i)
+
+            if len(strReturn) != 0:
+                self.err.append("   Add: Item(s) [" + ", ".join(strReturn) +
+                        "] already exist.")
 
         elif len(args) == 2:  # index + item
             if isinstance(args[0], (str, int)) and isinstance(args[1], (str, int)):
                 if isinstance(args[0], str) and isinstance(args[1], int):
+                    if len(self.lists["To-do"]) == 0 and args[1] == 0:
+                        self.lists["To-do"].append(Item(args[0]))
+                        self.lists["Unchecked"].append(Item(args[0]))
+                    elif args[1] >= 0 and args[1] < len(self.lists["To-do"]):
+                        self.lists["To-do"].insert(args[1], Item(args[0]))
+                        self.lists["Unchecked"].append(Item(args[0]))
+                    else:
+                        intReturn.append(str(args[1]))
+                        exist = True
+                    
                     if not self.lists["To-do"] and args[1] == 0:
                         self.lists["To-do"].append(args[0])
                         self.lists["Unchecked"].append(args[0])

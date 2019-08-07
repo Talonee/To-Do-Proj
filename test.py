@@ -1,9 +1,11 @@
-from fxn import *
+from fxn2 import *
 
 todo = ToDo()
 
 todo.add("Ayyyyyyyyye")
+todo.add(["Gas", "Iphone", "White", "Iphone"])
 todo.dspTdl()
+todo.dspError()
 ### todo.add
 # todo.add(["Eat", "Drink", "Sleep"])
 # todo.add(["Swim", "Laugh", "Superhero", "♣"], [0,0,10,0])
