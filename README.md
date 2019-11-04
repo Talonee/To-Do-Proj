@@ -1,4 +1,7 @@
-# To-Do-Proj (In Progress)
+# To-Do-Proj 
+
+## Project Status
+This project is currently **in progress**. However, due to personal indecisive, unclear method approach, the project will be on hold indefinitely. 
 
 ## Project Description
 The goal of this project is to imitate a to-do list with a focus on presenting flexible display functions (sort, day/month/year, multilevels, etc.) and to-do items based on their status (checked/unchecked, special tasks, etc.). 
