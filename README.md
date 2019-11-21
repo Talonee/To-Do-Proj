@@ -1,7 +1,7 @@
 # To-Do-Proj 
 
 ## Project Status
-This project is currently **in progress**. However, due to personal indecisive, unclear approach to accomplish the goal, the project will be on hold indefinitely until further notice. 
+This project is currently **on hold**. Due to indecisive, unclear approaches to accomplish the goal, the project is in hiatus until further notice.
 
 ## Project Description
 The goal of this project is to imitate a to-do list with a focus on presenting flexible display functions (sort, day/month/year, multilevels, etc.) and to-do items based on their status (checked/unchecked, special tasks, etc.). 
